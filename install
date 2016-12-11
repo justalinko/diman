@@ -92,10 +92,26 @@ dInstall
         "--uninstall" )
 dUninstall
 			;;
+		"--license" )
+cat LICENSE.txt > /dev/null 2>&1
+if [[ "$?" -eq "0" ]]; then
+	more LICENSE.txt
+	else
+	echo "LICENSE.txt was missing."
+fi          
+            ;;
+        "--about" )
+    echo "Diman free software."
+    echo "Manage linux disk with diman."
+    echo "Version : 1.2 codename KopiHitam"
+    echo "Author  : alinko a.k.a shutdown57"
+            ;;
 			*)
 echo "USAGE :"
 echo "--install   : For install diman."
 echo "--uninstall : For uninstall diman."
+echo "--license   : For display license this software."
+echo "--about     : For Know about this software."
 echo "EXAMPLES :"
 echo "./install --install"
            ;;
