@@ -1,5 +1,13 @@
 #!/bin/bash
-
+#################################################
+# c0ded by : shutdown57 a.k.a alinko            #
+# Copyright (c) 2016 || Dec 11 2016             #
+# Diman (DiskManager)      || Debian Based      #
+# Version 1.2 codename KopiHitam                #
+# https://github.com/alintamvanz/pain           #
+# alinkokomansuby@gmail.com - linuxcode.org     #
+#################################################
+# You can edit , redistribute and copying This file Under GPL (General Public License v3)
 
 m="\033[1;31m"
 k="\033[1;33m"
