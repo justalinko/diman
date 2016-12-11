@@ -1,0 +1,7 @@
+[Desktop Entry]
+Terminal=false
+Type=Application
+Name=Diman
+Comment=Linux Disk Manager
+Exec=gksu "xterm -geometry 110x35 -title 'Disk manager.' -e sh -c 'sudo diman;exec bash'"
+Icon=/opt/diman/diman.png
