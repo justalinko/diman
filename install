@@ -1,0 +1,105 @@
+#!/bin/bash
+m="\033[1;31m"
+k="\033[1;33m"
+h="\033[1;32m"
+b="\033[1;34m"
+n="\033[1;0m"
+clear
+clear
+clear
+
+echo -e $m"                        $h                         "$n 
+echo -e $m"    _______________     $h     |*\_/*|________     "$n
+echo -e $m"   |  ___________  |    $h    ||_/-\_|______  |    "$n
+echo -e $m"   | |   >   <   | |    $h    | |   0   <   | |    "$n
+echo -e $m"   | |     -     | |    $h    | |     -     | |    "$n
+echo -e $m"   | |   \___/   | |    $h    | |   \___/   | |    "$n
+echo -e $m"   |_____|\_/|_____|    $h    |_______________|    "$n
+echo -e $m"    / ********** \......$h..... / ********** \     "$n
+echo -e $m"  /  ************  \    $h    /  ************  \   "$n
+echo -e $m" --------------------   $h   --------------------  "$n
+echo -e $m"+-----------------------$h------------------------+"$n
+echo "> DISK MANAGER INSTALLER SCRIPT "
+echo "> Coded by : alinko (shutdown57)"
+CheckDepen(){
+	echo -e $h"[!] Check Dependencies.."$n
+	sleep 1
+	which xterm > /dev/null 2>&1
+	if [[ "$?" -eq "0" ]]; then
+	echo -e $h"[!] Check :$k Xterm Installed."$n
+	else
+    echo -e $h"[!] Check :$m Xterm not installed :("
+    echo -e $b"Try 'apt-get install xterm' to install it."
+    exit 1
+	fi
+	sleep 1
+	which gksu > /dev/null 2>&1
+	if [[ "$?" -eq "0" ]]; then
+	echo -e $h"[!] Check :$k Gksu Installed"
+    else
+    echo -e $h"[!] Check :$m Gksu not installed :("
+    echo -e $b"Try 'apt-get install gksu' to install it."
+	exit 1
+	fi
+	sleep 1
+	which mkfs > /dev/null 2>&1
+	if [[ "$?" -eq "0" ]]; then
+	echo -e $h"[!] Check :$k Mkfs Installed"
+    else
+    echo -e $h"[!] Check :$m mkfs not installed :("
+    echo -e $b"Try 'apt-get install mkfs' to install it."
+	exit 1
+	fi
+	sleep 1
+}
+dInstall(){
+	    echo -e $h"[+] INSTALL  : $b Copying diman.sh files.."$n
+		cp diman.sh /usr/bin/diman
+		sleep 1
+		echo -e $h"[+] INSTALL  : $b Creating desktop icon.."$n
+		cp desktop/diman.desktop /usr/share/applications/diman.desktop
+		sleep 1
+		echo -e $h"[+] INSTALL  : $b Creating Directory /opt/diman.."$n
+		mkdir /opt/diman
+		cp install /opt/diman
+		sleep 1
+		echo -e $h"[+] INSTALL  : $b Copying Icon files.."$n
+		cp desktop/diman.png /opt/diman/
+		chmod 777 -R /opt/diman
+		sleep 1
+		echo -e $h"[+] INSTALLATION FINISHED"$n
+}
+dUninstall(){
+	   echo -e $m"[-] UNINSTALL : $b Removing diman..."
+	   rm /usr/bin/diman
+	   sleep 1
+	   echo -e $m"[-] UNINSTALL : $b Removing desktop icon.."
+       rm /usr/share/applications/diman.desktop
+       sleep 1
+       echo -e $m"[-] UNINSTALL : $b Removing diman logfiles.."
+       rm /opt/diman/*
+       rmdir /opt/diman
+       sleep 1
+       echo -e $m"[-] DIMAN UNINSTALLED [-]"$n
+}
+
+if [[ `whoami` == "root" ]]; then
+	case $1 in
+		"--install" )
+CheckDepen
+dInstall
+            ;;
+        "--uninstall" )
+dUninstall
+			;;
+			*)
+echo "USAGE :"
+echo "--install   : For install diman."
+echo "--uninstall : For uninstall diman."
+echo "EXAMPLES :"
+echo "./install --install"
+           ;;
+	esac
+else
+	echo -e $m"[+] $n Please,run it as root."
+fi
